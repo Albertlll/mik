@@ -1,6 +1,7 @@
 import { messageDataProps } from "./props";
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
-import avatarImg from '../assets/avatarbot.jpeg'
+import {Button} from '@/components/ui/button'
+import avatarImg from '../assets/avatarbot.svg'
 import { motion } from "framer-motion";
 function Message(props : {messageData : messageDataProps}) {
     console.log(props.messageData.position)
@@ -29,7 +30,7 @@ function Message(props : {messageData : messageDataProps}) {
                 
                 >
                 <Avatar>
-                    <AvatarImage src={avatarImg}/>
+                    <AvatarImage className="scale-75" src={avatarImg}/>
                 </Avatar>
                 </motion.div>
 
@@ -47,7 +48,25 @@ function Message(props : {messageData : messageDataProps}) {
                         }} className={props.messageData.position == "left" ?
                 "relative max-w-[70%] text-left break-words p-2 bg-primary rounded-lg" :
                 "relative max-w-[70%] text-left break-words p-2 bg-secondary rounded-lg"}>
-                {props.messageData.message.toString()}
+
+                {props.messageData.type == 'button' ?
+                <div className="w-full h-full gap-4 flex flex-col justify-between items-center">
+
+                    <div className="text-4xl text-primary">
+                        {props.messageData.content.header + '₽'}
+                    </div>
+{/* 
+                    <div className="text-sm text">
+                        {props.messageData.content.description}
+                    </div> */}
+
+                    <Button>
+                        {props.messageData.content.buttonBody}
+                    </Button>
+                </div>
+                :
+                props.messageData.message.toString()
+                }
             </motion.div>    
         </div>
 

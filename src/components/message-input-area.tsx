@@ -6,7 +6,8 @@ import { Textarea } from "@/components/ui/textarea"
 
 import { useState, useRef} from "react"
 import { messageDataProps } from "./props"
-import data from '../assets/data.json'
+// import data from '../assets/data.json'
+// import { describe } from "node:test"
 
 
 
@@ -23,16 +24,20 @@ export function MessageInput(props: {setMessagesData : Function}) {
       return
     }
 
+    // var num = Math.floor(Math.random() * data.length)
     
-
-    var num = Math.floor(Math.random() * data.length)
-    
-    props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'left', message : message}])
+    props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'left', message : message, type : 'text'}])
     setTimeout(() => {
 
-        props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'right', message : data[num]}])
+    props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'right', content : {header : '500', buttonBody : 'Отправить', description : 'Внуку для школы'}, type : 'button'}])
     
     }, 300)
+
+    setTimeout(() => {
+
+      props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'right', message : 'Нажмите на кнопку Отправить, чтобы прислать деньги внуку. После нажатия вы войдете в систему СБП для перевода, где вы сможете сверить данные и подтвердить перевод.', type : 'text'}])
+      
+      }, 300)
 
     if (messageInputRef.current) {
       messageInputRef.current.value = ''

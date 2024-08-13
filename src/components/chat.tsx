@@ -3,8 +3,9 @@ import { MessageInput } from "./message-input-area";
 import { useEffect, useRef, useState } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area"
 import {AnimatePresence } from "framer-motion";
+import { messageDataProps } from "./props";
 export function Chat() {
-    const [messagesData, setMessagesData] = useState<Array<{message : string, position : 'left' | 'right'}>>([]);
+    const [messagesData, setMessagesData] = useState<Array<messageDataProps>>([]);
 
     var lastMessageRef = useRef<any>(null);
 
@@ -19,7 +20,10 @@ export function Chat() {
 
             <ScrollArea className="relative w-full h-full p-3">
                 {messagesData.map((messageData, index) => (
+
                     <AnimatePresence key={index} initial={true}>
+
+                        
                         <div ref={lastMessageRef} className="mt-3">
                             <Message messageData={messageData}/>
                         </div>

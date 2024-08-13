@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://albertlll.github.io/simple-chat/",
+  "homepage": "https://albertlll.github.io/mik/",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
