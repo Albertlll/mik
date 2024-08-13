@@ -16,9 +16,9 @@ export function Chat() {
 
 
     return (
-        <div className="relative flex flex-col justify-between p-8 h-full w-full border rounded-md border-input bg-background mob:p-2 mob:border-transparent">
+        <div className="relative flex flex-col justify-between p-8 h-full w-full border rounded-md border-input bg-background mob:p-1 mob:border-transparent">
 
-            <ScrollArea className="relative w-full h-full p-3">
+            <ScrollArea className="relative w-full h-full p-3 mob:p-0">
                 {messagesData.map((messageData, index) => (
 
                     <AnimatePresence key={index} initial={true}>

@@ -42,6 +42,8 @@ export function MessageInput(props: {setMessagesData : Function}) {
     if (messageInputRef.current) {
       messageInputRef.current.value = ''
     }
+
+    setMessage('')
 }
 
   return (

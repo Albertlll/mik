@@ -1,7 +1,7 @@
 import { messageDataProps } from "./props";
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import {Button} from '@/components/ui/button'
-import avatarImg from '../assets/avatarbot.svg'
+import avatarImg from '../assets/avatarbot.jpg'
 import { motion } from "framer-motion";
 function Message(props : {messageData : messageDataProps}) {
     console.log(props.messageData.position)
@@ -30,7 +30,7 @@ function Message(props : {messageData : messageDataProps}) {
                 
                 >
                 <Avatar>
-                    <AvatarImage className="scale-75" src={avatarImg}/>
+                    <AvatarImage src={avatarImg}/>
                 </Avatar>
                 </motion.div>
 
