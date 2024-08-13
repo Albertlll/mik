@@ -24,7 +24,7 @@ export function Chat() {
                     <AnimatePresence key={index} initial={true}>
 
                         
-                        <div ref={lastMessageRef} className="mt-3">
+                        <div ref={lastMessageRef} className="mt-3 mob:mt-5">
                             <Message messageData={messageData}/>
                         </div>
 
