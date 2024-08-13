@@ -3,12 +3,12 @@ import { CornerDownLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-
+import AudioRecorder from "./audio-recorder"
 import { useState, useRef} from "react"
 import { messageDataProps } from "./props"
 // import data from '../assets/data.json'
 // import { describe } from "node:test"
-
+import AudioPlayer from "./audio-player"
 
 
 
@@ -17,10 +17,19 @@ export function MessageInput(props: {setMessagesData : Function}) {
 
   const [message, setMessage] = useState<string>('');
 
+  const [audioURL, setAudioURL] = useState<string>('');
+
   const messageInputRef = useRef<HTMLTextAreaElement>(null);
 
   const handleMessageSend = () => {
-    if (message.trim() === '') {
+    if (message.trim() === '' && !audioURL) {
+      return
+    }
+
+    if (audioURL){
+      props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'left', audioURL : audioURL, type : 'audio'}]);
+      setAudioURL('')
+
       return
     }
 
@@ -48,25 +57,73 @@ export function MessageInput(props: {setMessagesData : Function}) {
 
   return (
     <div
-      className="relative overflow-hidden rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring"
+      className="relative overflow-hidden rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring grid gap-3 grid-rows-[100px_40px]"
     >
       <Label htmlFor="message" className="sr-only">
         Сообщение
+
       </Label>
-      <Textarea
+
+      <div className="h-full w-full">
+
+      {
+        audioURL ?
+        <div className="bg-secondary">
+
+        <AudioPlayer barGap={8} barWidth={5} audioHeight={80} audioURL={audioURL}/>
+        </div> 
+
+        // {
+        //   "container": "body",
+        //   "height": 100,
+        //   "width": 239,
+        //   "splitChannels": false,
+        //   "normalize": false,
+        //   "waveColor": "#ff4e00",
+        //   "progressColor": "#dd5e98",
+        //   "cursorColor": "#ddd5e9",
+        //   "cursorWidth": 3,
+        //   "barWidth": 5,
+        //   "barGap": 8,
+        //   "barRadius": 30,
+        //   "barHeight": 0.9,
+        //   "barAlign": "",
+        //   "minPxPerSec": 1,
+        //   "fillParent": true,
+        //   "url": "/wavesurfer-code/examples/audio/audio.wav",
+        //   "mediaControls": false,
+        //   "autoplay": false,
+        //   "interact": true,
+        //   "dragToSeek": true,
+        //   "hideScrollbar": false,
+        //   "audioRate": 1,
+        //   "autoScroll": true,
+        //   "autoCenter": true,
+        //   "sampleRate": 8000
+        // }
+        :
+
+        <Textarea
         ref={messageInputRef}
         id="message"
-        placeholder="Напишите сдесь свое сообщение"
+        placeholder="Напишите здесь свое сообщение"
         className="min-h-12 resize-none shadow-none !bg-transparent !outline-none !border-transparent"
         onChange={(e) => setMessage(e.target.value)}
       />
-      <div className="flex items-center p-3 pt-0">
+      }
+
+    </div>
+
+    
+      <div className="flex items-center p-3 pt-0 gap-3">
         <Button size="sm" className="ml-auto gap-1.5"
         onMouseDown={(e) => {e.preventDefault()}}
         onClick={() => {handleMessageSend()}}>
           Отправить сообщение
           <CornerDownLeft className="size-3.5" />
         </Button>
+        <AudioRecorder setAudioURL={setAudioURL}/>
+
       </div>
     </div>
   )

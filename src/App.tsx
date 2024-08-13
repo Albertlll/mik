@@ -4,7 +4,7 @@ import './App.css'
 // import { ThemeProvider } from './components/theme-provider'
 // import { ModeToggle } from './components/mode-toggle'
 import {Chat} from './components/chat'
-
+import AudioRecorder from './components/audio-recorder'
 
 
 function App() {
@@ -17,6 +17,7 @@ function App() {
 
         <div className='flex w-full h-full justify-center p-8 mob:p-1'>
         <Chat/>
+        {/* <AudioRecorder/> */}
         </div>
         {/* </ThemeProvider> */}
     </>

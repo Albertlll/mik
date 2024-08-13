@@ -3,6 +3,7 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import {Button} from '@/components/ui/button'
 import avatarImg from '../assets/avatarbot.jpg'
 import { motion } from "framer-motion";
+import AudioPlayer from "./audio-player";
 function Message(props : {messageData : messageDataProps}) {
     console.log(props.messageData.position)
     return (
@@ -63,6 +64,11 @@ function Message(props : {messageData : messageDataProps}) {
                     <Button>
                         {props.messageData.content.buttonBody}
                     </Button>
+                </div>
+                :
+                props.messageData.type == 'audio'?
+                <div className="relative w-[70%]">
+                    <AudioPlayer barGap={2} barWidth={2} audioHeight={40} audioURL={props.messageData.audioURL} />
                 </div>
                 :
                 props.messageData.message.toString()
