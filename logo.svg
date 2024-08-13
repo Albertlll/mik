@@ -1,17 +1,7 @@
-<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="128" height="128" rx="64" fill="#FFF7F7"/>
-<circle cx="15" cy="15" r="15" transform="matrix(1 0 0 -1 25 82)" fill="#FFAEAE"/>
-<circle cx="15" cy="15" r="15" transform="matrix(1 0 0 -1 65 94)" fill="#FFAEAE"/>
-<circle cx="15" cy="15" r="15" transform="matrix(1 0 0 -1 72 91)" fill="#FFAEAE"/>
-<circle cx="15" cy="15" r="15" transform="matrix(1 0 0 -1 35 67)" fill="#FFAEAE"/>
-<circle cx="15" cy="15" r="15" transform="matrix(1 0 0 -1 44 85)" fill="#FFAEAE"/>
-<circle cx="15" cy="15" r="15" transform="matrix(1 0 0 -1 48 63)" fill="#FFAEAE"/>
-<circle cx="15" cy="15" r="15" transform="matrix(1 0 0 -1 65 82)" fill="#FFAEAE"/>
-<circle cx="15" cy="15" r="15" transform="matrix(1 0 0 -1 74 79)" fill="#FFAEAE"/>
-<circle cx="15" cy="15" r="15" transform="matrix(1 0 0 -1 69 64)" fill="#FFAEAE"/>
-<circle cx="12" cy="12" r="12" transform="matrix(1 0 0 -1 65 64)" fill="#FFAEAE"/>
-<circle cx="12" cy="12" r="12" transform="matrix(1 0 0 -1 62 58)" fill="#FFAEAE"/>
-<circle cx="12" cy="12" r="12" transform="matrix(1 0 0 -1 28 67)" fill="#FFAEAE"/>
-<circle cx="12" cy="12" r="12" transform="matrix(1 0 0 -1 38 85)" fill="#FFAEAE"/>
-<circle cx="12" cy="12" r="12" transform="matrix(1 0 0 -1 55 88)" fill="#FFAEAE"/>
+<svg width="17" height="20" viewBox="0 0 17 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M17 11.7391C17 16.3015 13.1944 20 8.5 20C3.80558 20 0 16.3015 0 11.7391C0 7.17678 3.80558 3.47826 8.5 3.47826C13.1944 3.47826 17 7.17678 17 11.7391Z" fill="#1AAB49"/>
+<path d="M0 1.73913C0 0.778635 0.801175 0 1.78947 0C2.77777 0 3.57895 0.778635 3.57895 1.73913V12.1739H0V1.73913Z" fill="#1AAB49"/>
+<path d="M13.4211 1.73913C13.4211 0.778635 14.2222 0 15.2105 0C16.1988 0 17 0.778635 17 1.73913V12.1739H13.4211V1.73913Z" fill="#1AAB49"/>
+<path d="M6.26316 11.7391C6.75731 11.7391 7.17375 11.3349 6.98131 10.8926C6.87012 10.637 6.70855 10.402 6.50274 10.2019C6.08325 9.79425 5.5143 9.56522 4.92105 9.56522C4.32781 9.56522 3.75886 9.79425 3.33937 10.2019C3.13355 10.402 2.97198 10.637 2.86079 10.8926C2.66836 11.3349 3.0848 11.7391 3.57895 11.7391H6.26316Z" fill="white"/>
+<path d="M13.4211 11.7391C13.9152 11.7391 14.3316 11.3349 14.1392 10.8926C14.028 10.637 13.8664 10.402 13.6606 10.2019C13.2411 9.79425 12.6722 9.56522 12.0789 9.56522C11.4857 9.56522 10.9168 9.79425 10.4973 10.2019C10.2914 10.402 10.1299 10.637 10.0187 10.8926C9.82625 11.3349 10.2427 11.7391 10.7368 11.7391H13.4211Z" fill="white"/>
 </svg>
