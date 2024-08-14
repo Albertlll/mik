@@ -107,7 +107,7 @@ export function MessageInput(props: {setMessagesData : Function}) {
         ref={messageInputRef}
         id="message"
         placeholder="Напишите здесь свое сообщение"
-        className="min-h-12 resize-none shadow-none !bg-transparent !outline-none !border-transparent"
+        className="h-full resize-none shadow-none !bg-transparent !outline-none !border-transparent"
         onChange={(e) => setMessage(e.target.value)}
       />
       }

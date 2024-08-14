@@ -1,17 +1,20 @@
-import { useState, useRef } from "react";
-import { Button } from "./ui/button";
-import { UrlObject } from "url";
+import { useState, useRef, useEffect } from "react";
+// import { Button } from "./ui/button";
+// import { UrlObject } from "url";
 import { Mic, MicOff } from "lucide-react";
 
 const AudioRecorder = (props : {setAudioURL : Function}) => {
     const mimeType = "audio/webm";
 
-    const [permission, setPermission] = useState(false);
+    // const [permission, setPermission] = useState(false);
     const mediaRecorder = useRef<MediaRecorder | null>(null);
     const [recordingStatus, setRecordingStatus] = useState("inactive");
     const [stream, setStream] = useState<MediaStream | null>(null);
     const [audioChunks, setAudioChunks] = useState<Array<Blob>>([]);
-    const [audio, setAudio] = useState<string>('');
+
+    useEffect(() => {
+        getMicrophonePermission();
+    }, [])
 
     const getMicrophonePermission = async () => {
         if ("MediaRecorder" in window) {
@@ -20,10 +23,15 @@ const AudioRecorder = (props : {setAudioURL : Function}) => {
                     audio: true,
                     video: false,
                 });
-                setPermission(true);
-                setStream(streamData);
+
+
+                if (streamData.active) {localStorage.setItem('permission', 'true'); setStream(streamData);
+                }
+                else {localStorage.setItem('permission', 'false')}
+                // setPermission(true);
+
             } catch (err) {
-                console.log(err);
+                localStorage.setItem('permission', 'false')
             }
         } else {
             alert("The MediaRecorder API is not supported in your browser.");
@@ -31,6 +39,7 @@ const AudioRecorder = (props : {setAudioURL : Function}) => {
     };
 
     const startRecording = async () => {
+        console.log(stream)
         if (!stream) return;
         
         setRecordingStatus("recording");
@@ -39,7 +48,13 @@ const AudioRecorder = (props : {setAudioURL : Function}) => {
         //set the MediaRecorder instance to the mediaRecorder ref
         mediaRecorder.current = media;
         //invokes the start method to start the recording process
+        try{
         mediaRecorder.current.start();
+        } catch (err) {
+            localStorage.setItem('permission', 'false')
+            getMicrophonePermission()
+            return;
+        }
         let localAudioChunks : Array<Blob> = [];
         mediaRecorder.current.ondataavailable = (event) => {
            if (typeof event.data === "undefined") return;
@@ -62,7 +77,6 @@ const AudioRecorder = (props : {setAudioURL : Function}) => {
           //creates a playable URL from the blob file.
            const audioUrl = URL.createObjectURL(audioBlob);
            console.log(audioUrl);
-           setAudio(audioUrl);
            props.setAudioURL(audioUrl);
            setAudioChunks([]);
         };
@@ -70,7 +84,9 @@ const AudioRecorder = (props : {setAudioURL : Function}) => {
 
 
       const microPress = () => {
-        if (!permission){
+        console.log(recordingStatus);
+
+        if (localStorage.getItem('permission') == 'false' || !localStorage.getItem('permission')){
             getMicrophonePermission();
             return;
         };
@@ -121,12 +137,15 @@ const AudioRecorder = (props : {setAudioURL : Function}) => {
         // </div>
 
         <button onClick={() => {microPress()}} className='flex justify-center items-center w-9 h-9 rounded-full bg-primary'>
-
-            {permission ? 
+{/* 
+            {localStorage.getItem('permission') == 'true' ? 
             <Mic color={recordingStatus == 'recording' ? 'red' : 'white'}/>
             :
             <MicOff color='white'/>
-            }
+            } */}
+
+            <Mic color={recordingStatus == 'recording' ? 'red' : 'white'}/>
+
 
         </button>
     );
