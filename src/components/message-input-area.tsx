@@ -9,11 +9,13 @@ import { messageDataProps } from "./props"
 // import data from '../assets/data.json'
 // import { describe } from "node:test"
 import AudioPlayer from "./audio-player"
+import { Client } from "react-stomp-hooks"
+import { create } from "domain"
+// import { socket } from "./chat"
 
 
 
-
-export function MessageInput(props: {setMessagesData : Function}) {
+export function MessageInput(props: {setMessagesData : Function, stompClient : Client | undefined}) {
 
   const [message, setMessage] = useState<string>('');
 
@@ -27,16 +29,32 @@ export function MessageInput(props: {setMessagesData : Function}) {
     }
 
     if (audioURL){
+
+      // socket.emit('/app/chat', 'mvjmfdmvmdf')
+
+
+
+
       props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'left', audioURL : audioURL, type : 'audio'}]);
       setAudioURL('')
 
       return
     }
 
+    if (props.stompClient) {
+      props.stompClient.publish({
+        destination: "/app/chat",
+        body: JSON.stringify({chatId: null, recipientId: 'mik', message: {'m' : message}, createdAt: null}),
+    })
+    }
+
+
     // var num = Math.floor(Math.random() * data.length)
     
     props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'left', message : message, type : 'text'}])
     setTimeout(() => {
+
+
 
     props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'right', content : {header : '500', buttonBody : 'Отправить', description : 'Внуку для школы'}, type : 'button'}])
     
