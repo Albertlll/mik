@@ -10,7 +10,6 @@ import { messageDataProps } from "./props"
 // import { describe } from "node:test"
 import AudioPlayer from "./audio-player"
 import { Client } from "react-stomp-hooks"
-import { create } from "domain"
 // import { socket } from "./chat"
 
 
@@ -35,7 +34,7 @@ export function MessageInput(props: {setMessagesData : Function, stompClient : C
 
 
 
-      props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'left', audioURL : audioURL, type : 'audio'}]);
+      props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'right', audioURL : audioURL, type : 'audio'}]);
       setAudioURL('')
 
       return
@@ -44,25 +43,25 @@ export function MessageInput(props: {setMessagesData : Function, stompClient : C
     if (props.stompClient) {
       props.stompClient.publish({
         destination: "/app/chat",
-        body: JSON.stringify({chatId: null, recipientId: 'mik', message: {'m' : message}, createdAt: null}),
+        body: JSON.stringify({id: null, chatId: null, recipientId: 'mik', senderId: localStorage.getItem('uuid'), message: {'m' : message}, createdAt: null}),
     })
     }
 
 
     // var num = Math.floor(Math.random() * data.length)
     
-    props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'left', message : message, type : 'text'}])
+    props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'right', message : message, type : 'text'}])
     setTimeout(() => {
 
 
 
-    props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'right', content : {header : '500', buttonBody : 'Отправить', description : 'Внуку для школы'}, type : 'button'}])
+    props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'left', content : {header : '500', buttonBody : 'Отправить', description : 'Внуку для школы'}, type : 'button'}])
     
     }, 300)
 
     setTimeout(() => {
 
-      props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'right', message : 'Нажмите на кнопку Отправить, чтобы прислать деньги внуку. После нажатия вы войдете в систему СБП для перевода, где вы сможете сверить данные и подтвердить перевод.', type : 'text'}])
+      props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'left', message : 'Нажмите на кнопку Отправить, чтобы прислать деньги внуку. После нажатия вы войдете в систему СБП для перевода, где вы сможете сверить данные и подтвердить перевод.', type : 'text'}])
       
       }, 300)
 
@@ -86,9 +85,10 @@ export function MessageInput(props: {setMessagesData : Function, stompClient : C
 
       {
         audioURL ?
+        
         <div className="bg-secondary">
 
-        <AudioPlayer barGap={8} barWidth={5} audioHeight={80} audioURL={audioURL}/>
+        <AudioPlayer barGap={8} barWidth={5} audioHeight={80} audioURL={audioURL} setAudioURL={setAudioURL}/>
         </div> 
 
         // {

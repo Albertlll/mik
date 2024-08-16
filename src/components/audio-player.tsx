@@ -1,9 +1,10 @@
 
 import WavesurferPlayer from '@wavesurfer/react'
-import { Play, Pause} from 'lucide-react'
+import { Play, Pause, Trash} from 'lucide-react'
 import { useState } from'react'
 import WaveSurfer from 'wavesurfer.js'
-function AudioPlayer(props : { audioURL : string, audioHeight : number, barWidth : number, barGap : number}) {
+import { motion } from 'framer-motion'
+function AudioPlayer(props : { audioURL : string, audioHeight : number, barWidth : number, barGap : number, setAudioURL : Function | null}) {
 
     const [wavesurfer, setWavesurfer] = useState<WaveSurfer | null>(null)
     const [isPlaying, setIsPlaying] = useState(false)
@@ -16,6 +17,14 @@ function AudioPlayer(props : { audioURL : string, audioHeight : number, barWidth
     const onPlayPause = () => {
         wavesurfer && wavesurfer.playPause()
       }
+
+    const deleteAudio = () => {
+        wavesurfer && wavesurfer.destroy()
+        setWavesurfer(null)
+        setIsPlaying(false)
+        props.setAudioURL &&
+        props.setAudioURL('')
+    }
 
 
     return (
@@ -49,6 +58,15 @@ function AudioPlayer(props : { audioURL : string, audioHeight : number, barWidth
                 onPause={() => setIsPlaying(false)}
                 />
         </div>
+
+
+        {
+            props.setAudioURL &&
+            <button onClick={deleteAudio} className='rounded-full bg-primary h-12 w-12 relative flex items-center justify-center'>
+                <Trash color='white'/>
+            </button>
+
+        }
 
             
         </div>

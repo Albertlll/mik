@@ -7,30 +7,26 @@ import AudioPlayer from "./audio-player";
 function Message(props: { messageData: messageDataProps }) {
     console.log(props.messageData.position)
     return (
-        <div className={props.messageData.position == "left" ?
+        <div className={props.messageData.position == "right" ?
             "w-full flex justify-end" :
-            "w-full flex justify-start gap-3"
+            "w-full flex justify-start gap-3 items-end"
         }>
-
-
             {
-                props.messageData.position != "left" &&
+                props.messageData.position == "left" &&
                 <motion.div
 
-                    initial={{ opacity: 0, scale: 0.1 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{
-                        type: 'spring',
-                        duration: 0.01,
-                        damping: 20,
-                        stiffness: 200,
-                        mass: 1,
-                        ease: "easeInOut"
+                        initial={{ opacity: 0, scale: 0.1 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{
+                            type: 'spring',
+                            duration: 0.01,
+                            damping: 20,
+                            stiffness: 200,
+                            mass: 1,
+                            ease: "easeInOut"
 
-                    }}
-
-
-                >
+                        }}
+                    >
                     <Avatar>
                         <AvatarImage src={avatarImg} />
                     </Avatar>
@@ -49,13 +45,20 @@ function Message(props: { messageData: messageDataProps }) {
                         mass: 1,
                         ease: "easeInOut"
 
-                    }} className={props.messageData.position == "left" ?
+                    }} className={props.messageData.position == "right" ?
                         "relative max-w-[70%] text-left break-words p-2 bg-primary rounded-lg" :
                         "relative max-w-[70%] text-left break-words p-2 bg-secondary rounded-lg"}>
+
                     <div className="w-full h-full gap-4 flex flex-col justify-between items-center">
 
                         <div className="text-4xl text-primary">
-                            {props.messageData.content.header + '₽'}
+                        {
+                            props.messageData.content?.header + '₽'
+                       
+                            
+                        }
+
+                            
                         </div>
                         {/* 
                     <div className="text-sm text">
@@ -63,7 +66,12 @@ function Message(props: { messageData: messageDataProps }) {
                     </div> */}
 
                         <Button>
-                            {props.messageData.content.buttonBody}
+                            
+
+                            {props.messageData.content?.buttonBody}
+                            
+                            
+                        
                         </Button>
                     </div>
 
@@ -81,11 +89,11 @@ function Message(props: { messageData: messageDataProps }) {
                             mass : 1,
                             ease : "easeInOut"
  
-                        }} className={props.messageData.position == "left" ?
+                        }} className={props.messageData.position == "right" ?
                 "relative w-[40%] text-left break-words p-2 bg-primary rounded-lg flex justify-center" :
                 "relative w-[60%] text-left break-words p-2 bg-secondary rounded-lg flex justify-center"}>
 
-                        <AudioPlayer barGap={2} barWidth={2} audioHeight={40} audioURL={props.messageData.audioURL} />
+                        <AudioPlayer barGap={2} barWidth={2} audioHeight={40} audioURL={props.messageData.audioURL} setAudioURL={null}/>
 
                 </motion.div>
 
@@ -102,7 +110,7 @@ function Message(props: { messageData: messageDataProps }) {
                             mass : 1,
                             ease : "easeInOut"
  
-                        }} className={props.messageData.position == "left" ?
+                        }} className={props.messageData.position == "right" ?
                 "relative max-w-[70%] text-left break-words p-2 bg-primary rounded-lg" :
                 "relative max-w-[70%] text-left break-words p-2 bg-secondary rounded-lg"}>
                     {props.messageData.message.toString()}
