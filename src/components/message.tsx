@@ -5,9 +5,10 @@ import avatarImg from '../assets/avatarbot.jpg'
 import { motion } from "framer-motion";
 import AudioPlayer from "./audio-player";
 
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts" 
+import { Bar, BarChart, CartesianGrid, Pie, PieChart, XAxis } from "recharts" 
 import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartConfig } from "@/components/ui/chart"
 import { Card, CardContent } from "./ui/card";
+import {Table, TableCaption, TableHeader, TableRow, TableHead, TableBody, TableCell, TableFooter } from "./ui/table";
 
 const chartData = [
     { date: "2024-04-01", desktop: 222, mobile: 150 },
@@ -102,18 +103,98 @@ const chartData = [
     { date: "2024-06-29", desktop: 103, mobile: 160 },
     { date: "2024-06-30", desktop: 446, mobile: 400 },
   ]
-  
-  const chartConfig = {
-    views: {
-      label: "Page Views",
+
+
+  const chartPieData = [
+    { browser: "chrome", visitors: 275, fill: "#91d8ff" },
+    { browser: "safari", visitors: 200, fill: "#12242e" },
+    { browser: "firefox", visitors: 187, fill: "#ff8181" },
+    { browser: "edge", visitors: 173, fill: "#f371b92d" },
+    { browser: "other", visitors: 90, fill: "#baffa9" },
+  ]
+
+
+  const chartPieConfig = {
+    visitors: {
+      label: "Visitors",
     },
-    desktop: {
-      label: "Desktop",
-      color: "hsl(var(--chart-1))",
+    chrome: {
+      label: "Chrome",
+    },
+    safari: {
+      label: "Safari",
+    },
+    firefox: {
+      label: "Firefox",
+    },
+    edge: {
+      label: "Edge",
+    },
+    other: {
+      label: "Other",
+    },
+  } satisfies ChartConfig
+  
+
+
+
+
+  
+  const inputChartConfig = {
+    dataKey : "desktop",
+    characteristic : "Число просмотров",
+    data: {
+
+    }
+  }
+
+  const chartConfig = {
+    [inputChartConfig.dataKey] : {
+        label: inputChartConfig.dataKey,
+        color: "hsl(var(--chart-1))",    
+    },
+
+    [inputChartConfig.characteristic] : {
+        label: inputChartConfig.characteristic,
     }
   } satisfies ChartConfig
   
 
+  const invoices = [
+    [
+      "INV004",
+      "Paid",
+      "$450.00",
+      "Credit Card",
+    ],
+    [
+      "INV005",
+      "Paid",
+      "$550.00",
+      "PayPal",
+    ],
+    [
+      "INV006",
+      "Pending",
+      "$200.00",
+      "Bank Transfer",
+    ],
+    [
+      "INV007",
+      "Unpaid",
+      "$300.00",
+      "Credit Card",
+    ],
+  ]
+
+
+
+// const chartConfig = {
+//   desktop: {
+//     label: "Desktop",
+//     color: "#2563eb",
+//   },
+// } satisfies ChartConfig
 
 function Message(props: { messageData: messageDataProps }) {
     console.log(props.messageData)
@@ -230,6 +311,94 @@ function Message(props: { messageData: messageDataProps }) {
                 </motion.div>
 
                     :
+
+                    props.messageData.type == "chartPie" ?
+
+                    <motion.div
+                    initial={{opacity : 0, scale: 0.1}}
+                    animate={{opacity : 1, scale: 1}}
+                    transition={{type : 'spring', 
+                            duration : 0.01,
+                            damping : 20,
+                            stiffness : 200,
+                            mass : 1,
+                            ease : "easeInOut"
+ 
+                        }} className={props.messageData.position == "right" ?
+                "relative max-w-[70%] text-left break-words p-2 bg-primary rounded-lg" :
+                "relative max-w-[70%] text-left break-words p-2 bg-secondary rounded-lg"}>
+
+
+                        <Card className="w-full h-full">
+                    <CardContent className="px-2 sm:p-6">
+                    <ChartContainer config={chartPieConfig} className="min-h-[200px] w-full">
+                        <PieChart>
+                            <ChartTooltip content={<ChartTooltipContent hideLabel />} />
+                            <Pie data={chartPieData} dataKey="visitors" label nameKey="browser" />
+                        </PieChart>
+
+                    </ChartContainer>
+
+                    </CardContent>
+
+                </Card>
+
+                    </motion.div>
+
+                    
+
+                    :
+
+                    props.messageData.type == "table"?
+                    <motion.div
+                    initial={{opacity : 0, scale: 0.1}}
+                    animate={{opacity : 1, scale: 1}}
+                    transition={{type : 'spring', 
+                            duration : 0.01,
+                            damping : 20,
+                            stiffness : 200,
+                            mass : 1,
+                            ease : "easeInOut"
+ 
+                        }} className={props.messageData.position == "right" ?
+                "relative max-w-[70%] text-left break-words p-2 bg-primary rounded-lg" :
+                "relative max-w-[70%] text-left break-words p-2 bg-secondary rounded-lg"}>
+
+
+
+
+
+
+                    <Table>
+                        <TableCaption>A list of your recent invoices.</TableCaption>
+                        <TableHeader>
+                            <TableRow>
+                            <TableHead className="w-[100px]">Invoice</TableHead>
+                            <TableHead>Status</TableHead>
+                            <TableHead>Method</TableHead>
+                            <TableHead className="text-right">Amount</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {invoices.map((invoice, index) => (
+                            <TableRow key={index}>
+                                {invoice.map((cell, index2) => {
+                                    return <TableCell key={index2} className="font-medium">{cell}</TableCell>
+                                })}
+
+                            </TableRow>
+                            ))}
+                        </TableBody>
+                        </Table>
+
+                    
+
+
+
+
+
+                    </motion.div>
+                    :
                     <motion.div
                     initial={{opacity : 0, scale: 0.1}}
                     animate={{opacity : 1, scale: 1}}
@@ -253,7 +422,7 @@ function Message(props: { messageData: messageDataProps }) {
                                 content={
                                     <ChartTooltipContent
                                     className="w-[150px]"
-                                    nameKey="views"
+                                    nameKey={inputChartConfig.characteristic}
                                     labelFormatter={(value) => {
                                         return new Date(value).toLocaleDateString("en-US", {
                                         month: "short",
@@ -287,6 +456,7 @@ function Message(props: { messageData: messageDataProps }) {
                 </Card>
 
                 </motion.div>
+
             }
         </div >
 

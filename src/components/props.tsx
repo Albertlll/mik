@@ -24,6 +24,20 @@ export interface chartMessageContent extends abstractMessageDataProps{
     }
 }
 
+export interface chartPieMessageContent extends abstractMessageDataProps{
+    type : 'chartPie',
+    content : {    
+        data : any
+    }
+}
+
+export interface chartTableMessageContent extends abstractMessageDataProps{
+    type : 'table',
+    content : {    
+        data : any
+    }
+}
+
 export interface buttonMessageContent extends abstractMessageDataProps{
     type : 'button',
     content : {
@@ -34,4 +48,4 @@ export interface buttonMessageContent extends abstractMessageDataProps{
 }
 
 
-export type messageDataProps = textMessageContent | audioMessageContent | buttonMessageContent | chartMessageContent;
+export type messageDataProps = textMessageContent | audioMessageContent | buttonMessageContent | chartMessageContent | chartPieMessageContent | chartTableMessageContent;
