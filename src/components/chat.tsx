@@ -104,7 +104,7 @@ export function Chat() {
                     <AnimatePresence key={index} initial={true}>
 
                         
-                        <div ref={lastMessageRef} className="mt-3 mob:mt-5">
+                        <div ref={lastMessageRef} className="mt-3 mob:mt-5 w-full overflow-hidden">
                             <Message messageData={messageData}/>
                         </div>
 

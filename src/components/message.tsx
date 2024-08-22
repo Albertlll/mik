@@ -8,7 +8,8 @@ import AudioPlayer from "./audio-player";
 import { Bar, BarChart, CartesianGrid, Pie, PieChart, XAxis } from "recharts" 
 import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartConfig } from "@/components/ui/chart"
 import { Card, CardContent } from "./ui/card";
-import {Table, TableCaption, TableHeader, TableRow, TableHead, TableBody, TableCell, TableFooter } from "./ui/table";
+import {Table, TableCaption, TableHeader, TableRow, TableHead, TableBody, TableCell } from "./ui/table";
+import { ScrollArea, ScrollBar } from "./ui/scroll-area";
 
 const chartData = [
     { date: "2024-04-01", desktop: 222, mobile: 150 },
@@ -366,17 +367,14 @@ function Message(props: { messageData: messageDataProps }) {
 
 
 
-
-
-
                     <Table>
                         <TableCaption>A list of your recent invoices.</TableCaption>
                         <TableHeader>
                             <TableRow>
-                            <TableHead className="w-[100px]">Invoice</TableHead>
+                            <TableHead>Invoice</TableHead>
                             <TableHead>Status</TableHead>
                             <TableHead>Method</TableHead>
-                            <TableHead className="text-right">Amount</TableHead>
+                            <TableHead>Amount</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -410,12 +408,14 @@ function Message(props: { messageData: messageDataProps }) {
                             ease : "easeInOut"
  
                         }} className={props.messageData.position == "right" ?
-                "relative max-w-[70%] text-left break-words p-2 bg-primary rounded-lg" :
-                "relative max-w-[70%] w-[70%] text-left break-words p-2 bg-secondary rounded-lg"}>
+                "relative max-w-[70%] overflow-hidden text-left break-words p-2 bg-primary rounded-lg" :
+                "relative min-w-[30%] max-w-[70%] overflow-hidden text-left break-words p-2 bg-secondary rounded-lg"}>
 
-                <Card className="w-full h-full">
-                    <CardContent className="px-2 sm:p-6">
-                    <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
+                <Card className="w-full overflow-hidden ">
+                    <ScrollArea className="w-full h-full overflow-hidden " >
+                    
+                    <CardContent className="px-2 sm:p-6 w-full h-full overflow-hidden">
+                    <ChartContainer config={chartConfig} className="min-h-[170px] w-full overflow-hidden">
                         <BarChart accessibilityLayer data={chartData}>
                             <CartesianGrid vertical={false} />
                             <ChartTooltip
@@ -452,7 +452,8 @@ function Message(props: { messageData: messageDataProps }) {
                     </ChartContainer>
 
                     </CardContent>
-
+                    <ScrollBar orientation="horizontal" />
+                </ScrollArea>
                 </Card>
 
                 </motion.div>
