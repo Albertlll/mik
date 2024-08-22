@@ -3,8 +3,8 @@ import { useState, useRef, useEffect } from "react";
 // import { UrlObject } from "url";
 import { Mic, MicOff } from "lucide-react";
 
-const AudioRecorder = (props : {setAudioURL : Function}) => {
-    const mimeType = "audio/webm";
+const AudioRecorder = (props : {setAudioURL : Function, setAudioBlob : Function}) => {
+    const mimeType = "audio/ogg";
 
     // const [permission, setPermission] = useState(false);
     const mediaRecorder = useRef<MediaRecorder | null>(null);
@@ -73,11 +73,22 @@ const AudioRecorder = (props : {setAudioURL : Function}) => {
         mediaRecorder.current.stop();
         mediaRecorder.current.onstop = () => {
           //creates a blob file from the audiochunks data
-           const audioBlob = new Blob(audioChunks, { type: mimeType });
+           const audioBlob = new Blob(audioChunks, { type: mimeType});
           //creates a playable URL from the blob file.
            const audioUrl = URL.createObjectURL(audioBlob);
+           //sets the audioURL to the props.setAudioURL function
+        //    var link = document.createElement("a");
+
+        //     link.download = "audio.opus";
+        //     link.href = audioUrl;
+        //     document.body.appendChild(link);
+        //     setTimeout(() => {
+        //         link.click();
+        //         document.body.removeChild(link);
+        //     }, 33);
            console.log(audioUrl);
            props.setAudioURL(audioUrl);
+           props.setAudioBlob(audioBlob);
            setAudioChunks([]);
         };
       };

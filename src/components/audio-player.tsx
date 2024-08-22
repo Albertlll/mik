@@ -3,7 +3,6 @@ import WavesurferPlayer from '@wavesurfer/react'
 import { Play, Pause, Trash} from 'lucide-react'
 import { useState } from'react'
 import WaveSurfer from 'wavesurfer.js'
-import { motion } from 'framer-motion'
 function AudioPlayer(props : { audioURL : string, audioHeight : number, barWidth : number, barGap : number, setAudioURL : Function | null}) {
 
     const [wavesurfer, setWavesurfer] = useState<WaveSurfer | null>(null)

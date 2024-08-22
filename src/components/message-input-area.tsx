@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import AudioRecorder from "./audio-recorder"
-import { useState, useRef} from "react"
+import { useState, useRef, SetStateAction, Dispatch} from "react"
 import { messageDataProps } from "./props"
 // import data from '../assets/data.json'
 // import { describe } from "node:test"
@@ -12,45 +12,79 @@ import AudioPlayer from "./audio-player"
 import { Client } from "react-stomp-hooks"
 // import { socket } from "./chat"
 
+function getBase64(file : Blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      if (!reader.result) {return}
+      let encoded = reader.result.toString().replace(/^data:(.*,)?/, '');
+      if ((encoded.length % 4) > 0) {
+        encoded += '='.repeat(4 - (encoded.length % 4));
+      }
+      resolve(encoded);
+    };
+    reader.onerror = error => reject(error);
+  });
+}
 
 
-export function MessageInput(props: {setMessagesData : Function, stompClient : Client | undefined}) {
+export function MessageInput(props: {setMessagesData : Dispatch<SetStateAction<messageDataProps[]>>, stompClient : Client | undefined}) {
 
   const [message, setMessage] = useState<string>('');
 
   const [audioURL, setAudioURL] = useState<string>('');
+  
+  const [audioBlob, setAudioBlob] = useState<Blob>();
 
   const messageInputRef = useRef<HTMLTextAreaElement>(null);
 
   const handleMessageSend = () => {
-    if (message.trim() === '' && !audioURL) {
+    if (message.trim() === '' && !audioURL || !props.stompClient) {
+
       return
+
     }
 
-    if (audioURL){
+    if (audioURL && audioBlob){
 
       // socket.emit('/app/chat', 'mvjmfdmvmdf')
 
-
-
-
-      props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'right', audioURL : audioURL, type : 'audio'}]);
+      props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'right', content : {audioURL : audioURL}, type : 'audio'}]);
       setAudioURL('')
+      // var reader = new FileReader();
+      // reader.readAsDataURL(audioBlob); 
+      // reader.onloadend = function() {
+      // var base64data = reader.result;
+      // console.log(base64data);
+
+      getBase64(audioBlob).then((base64data) => {
+
+        if (!props.stompClient) {return;}
+        console.log(base64data)
+        props.stompClient.publish({
+          destination: "/app/chat/audio",
+          body: JSON.stringify({senderId: localStorage.getItem('uuid'), content: {audioURL : base64data}}),
+        })
+      
+      })
+
+      
+
 
       return
     }
 
-    if (props.stompClient) {
       props.stompClient.publish({
-        destination: "/app/chat",
-        body: JSON.stringify({id: null, chatId: null, recipientId: 'mik', senderId: localStorage.getItem('uuid'), message: {'m' : message}, createdAt: null}),
+        destination: "/app/chat/text",
+        body: JSON.stringify({senderId: localStorage.getItem('uuid'), content: {message : message}}),
     })
-    }
+    
 
 
     // var num = Math.floor(Math.random() * data.length)
     
-    props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'right', message : message, type : 'text'}])
+    props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'right', content : {message : message}, type : 'text'}])
     setTimeout(() => {
 
 
@@ -61,9 +95,15 @@ export function MessageInput(props: {setMessagesData : Function, stompClient : C
 
     setTimeout(() => {
 
-      props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'left', message : 'Нажмите на кнопку Отправить, чтобы прислать деньги внуку. После нажатия вы войдете в систему СБП для перевода, где вы сможете сверить данные и подтвердить перевод.', type : 'text'}])
+      props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'left', content : {message : 'Нажмите на кнопку Отправить, чтобы прислать деньги внуку. После нажатия вы войдете в систему СБП для перевода, где вы сможете сверить данные и подтвердить перевод.'}, type : 'text'}])
       
       }, 300)
+
+    
+      props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {type : 'chart', position: 'left', content : {data : 123}}])
+    
+
+    
 
     if (messageInputRef.current) {
       messageInputRef.current.value = ''
@@ -140,7 +180,7 @@ export function MessageInput(props: {setMessagesData : Function, stompClient : C
           Отправить сообщение
           <CornerDownLeft className="size-3.5" />
         </Button>
-        <AudioRecorder setAudioURL={setAudioURL}/>
+        <AudioRecorder setAudioBlob={setAudioBlob} setAudioURL={setAudioURL}/>
 
       </div>
     </div>

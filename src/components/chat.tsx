@@ -8,6 +8,7 @@ import { httpClient } from "@/httpClient";
 import { StompSessionProvider, useSubscription, useStompClient} from "react-stomp-hooks";
 
 
+
 export function Chat() {
     const [messagesData, setMessagesData] = useState<Array<messageDataProps>>([]);
 
@@ -16,6 +17,7 @@ export function Chat() {
 
 
     const stompClient = useStompClient();
+    
 
     useEffect(() => {
         lastMessageRef.current?.scrollIntoView(false);
@@ -28,12 +30,17 @@ export function Chat() {
             stompClient.subscribe(
                 "/user/" + localStorage.getItem('uuid') + "/queue/messages",
                 (message) => {
-                    setMessagesData((prev : Array<messageDataProps>) => [...prev, {position: 'left', message: message.body, content: null, type: 'text', audioURL: ''}])
+                    console.log(message)
+                    setMessagesData((prev : Array<messageDataProps>) => [...prev, {position: 'left', type: 'text', content: {message: JSON.parse(message.body).content.message}}]);
                     // setMessagesData((prev : Array<messageDataProps>) => return [...prev, {position : 'left', message : message, type : 'text'}])
                 }
             )
     
         }}, [stompClient])
+
+
+    
+    console.log(messagesData)
 
 
 
