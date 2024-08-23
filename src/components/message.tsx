@@ -342,7 +342,7 @@ function Message(props: { messageData: messageDataProps }) {
 
                     </CardContent>
 
-                </Card>
+                        </Card>
 
                     </motion.div>
 
@@ -362,34 +362,39 @@ function Message(props: { messageData: messageDataProps }) {
                             ease : "easeInOut"
  
                         }} className={props.messageData.position == "right" ?
-                "relative max-w-[70%] text-left break-words p-2 bg-primary rounded-lg" :
-                "relative max-w-[70%] text-left break-words p-2 bg-secondary rounded-lg"}>
+                "w-[70%] overflow-hidden" :
+                "w-[70%] overflow-hidden"}>
+                    <Card className="w-full h-full  overflow-hidden">
+                    <ScrollArea className="w-full h-full overflow-hidden " >
 
+                        <CardContent className="px-2 sm:p-6 w-full">
+                        
+                            <Table className="w-full">
+                                <TableCaption>A list of your recent invoices.</TableCaption>
+                                <TableHeader>
+                                    <TableRow>
+                                    <TableHead>Invoice</TableHead>
+                                    <TableHead>Status</TableHead>
+                                    <TableHead>Method</TableHead>
+                                    <TableHead>Amount</TableHead>
+                                    </TableRow>
+                                </TableHeader>
+                                <TableBody>
+                                    {invoices.map((invoice, index) => (
+                                    <TableRow key={index}>
+                                        {invoice.map((cell, index2) => {
+                                            return <TableCell key={index2} className="font-medium">{cell}</TableCell>
+                                        })}
 
+                                    </TableRow>
+                                    ))}
+                                </TableBody>
+                                </Table>
 
-                    <Table>
-                        <TableCaption>A list of your recent invoices.</TableCaption>
-                        <TableHeader>
-                            <TableRow>
-                            <TableHead>Invoice</TableHead>
-                            <TableHead>Status</TableHead>
-                            <TableHead>Method</TableHead>
-                            <TableHead>Amount</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {invoices.map((invoice, index) => (
-                            <TableRow key={index}>
-                                {invoice.map((cell, index2) => {
-                                    return <TableCell key={index2} className="font-medium">{cell}</TableCell>
-                                })}
+                        </CardContent>
+                        </ScrollArea>
+                        </Card>
 
-                            </TableRow>
-                            ))}
-                        </TableBody>
-                        </Table>
-
-                    
 
 
 

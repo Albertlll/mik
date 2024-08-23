@@ -1,4 +1,4 @@
-import Message from "./message";
+import Message from "./new-message";
 import { MessageInput } from "./message-input-area";
 import { useEffect, useRef, useState } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -104,7 +104,7 @@ export function Chat() {
                     <AnimatePresence key={index} initial={true}>
 
                         
-                        <div ref={lastMessageRef} className="mt-3 mob:mt-5 w-full overflow-hidden">
+                        <div ref={lastMessageRef} className="mt-3 pr-3 mob:mt-5 w-full overflow-hidden">
                             <Message messageData={messageData}/>
                         </div>
 
