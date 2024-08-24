@@ -11,12 +11,14 @@ import { Card, CardContent } from "./ui/card";
 import {Table, TableCaption, TableHeader, TableRow, TableHead, TableBody, TableCell } from "./ui/table";
 import { ScrollArea, ScrollBar } from "./ui/scroll-area";
 
+import LineChart from '@/components/messages/line-chart'
 
 import TextMessage from "./messages/text-message"
 import TableMessage from "./messages/table-message";
 import ChartMessage from "./messages/chart-message";
 import ButtonMessage from "./messages/button-message";
-
+import ChartPieMessage from "./messages/chart-pie-message";
+import AudioMessage from "./messages/audio-message";
 function Message(props: { messageData: messageDataProps}) {
     return (
         <div className={props.messageData.position == "left" ? "w-full flex justify-start gap-3" : "w-full flex justify-end"}>
@@ -25,25 +27,24 @@ function Message(props: { messageData: messageDataProps}) {
                 <AvatarImage src={avatarImg} />
             </Avatar>}
 
-            {props.messageData.type == 'table' &&
-            <TableMessage/>
-            }
-
             {props.messageData.type == 'text' &&
             <TextMessage position={props.messageData.position} text={props.messageData.content.message}/>
             }
 
-            {props.messageData.type == 'chart' &&
-            <ChartMessage/>
-            }
-
-
             {props.messageData.type == 'chartPie' &&
-            <ChartMessage/>
+            <ChartPieMessage {...props.messageData.content}/>
             }
 
             {props.messageData.type == 'button' &&
-            <ButtonMessage type="button" content={props.messageData.content} position={props.messageData.position} />
+            <ButtonMessage {...props.messageData.content}/>
+            }
+
+            {props.messageData.type == 'audio' &&
+            <AudioMessage  audioURL={props.messageData.content.audioURL}/>
+            }
+
+            {props.messageData.type == 'chartLine' &&
+            <LineChart {...props.messageData.content}/>
             }
         </div>
     );

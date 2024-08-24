@@ -12,6 +12,11 @@ import AudioPlayer from "./audio-player"
 import { Client } from "react-stomp-hooks"
 // import { socket } from "./chat"
 
+
+
+
+
+
 function getBase64(file : Blob) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -40,6 +45,7 @@ export function MessageInput(props: {setMessagesData : Dispatch<SetStateAction<m
   const messageInputRef = useRef<HTMLTextAreaElement>(null);
 
   const handleMessageSend = () => {
+    console.log('Привет')
     if (message.trim() === '' && !audioURL || !props.stompClient) {
 
       return
@@ -84,25 +90,26 @@ export function MessageInput(props: {setMessagesData : Dispatch<SetStateAction<m
 
     // var num = Math.floor(Math.random() * data.length)
     
-    props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'right', content : {message : message}, type : 'text'}])
-    setTimeout(() => {
+    // props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'right', content : {message : message}, type : 'text'}])
+    // setTimeout(() => {
 
 
 
-    props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'left', content : {header : '500', buttonBody : 'Отправить', description : 'Внуку для школы'}, type : 'button'}])
+    // props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'left', content : {header : '500', buttonBody : 'Отправить', url : 'Внуку для школы'}, type : 'button'}])
     
-    }, 300)
+    // }, 300)
 
-    setTimeout(() => {
+    // setTimeout(() => {
 
-      props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'left', content : {message : 'Нажмите на кнопку Отправить, чтобы прислать деньги внуку. После нажатия вы войдете в систему СБП для перевода, где вы сможете сверить данные и подтвердить перевод.'}, type : 'text'}])
+    //   props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'left', content : {message : 'Нажмите на кнопку Отправить, чтобы прислать деньги внуку. После нажатия вы войдете в систему СБП для перевода, где вы сможете сверить данные и подтвердить перевод.'}, type : 'text'}])
       
-      }, 300)
+    //   }, 300)
 
     
-      props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {type : 'chart', position: 'left', content : {data : 123}}])
-      props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {type : 'chartPie', position: 'left', content : {data : 123}}])
-      props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {type : 'table', position: 'left', content : {data : 123}}])
+      // props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {type : 'chart', position: 'left', content : {data : 123}}])
+      // props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {type : 'chartLine', position: 'left', content : {data : 123}}])
+      // props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {type : 'table', position: 'left', content : {data : 123}}])
+      // props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {type : 'chartPie', position: 'left', content : {data : 123}}])
 
 
     

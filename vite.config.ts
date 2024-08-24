@@ -3,6 +3,10 @@ import react from "@vitejs/plugin-react"
 import { defineConfig } from "vite"
 
 export default defineConfig({
+  // server: {
+  //   host: '192.168.1.51'
+  // },
+
   base: "https://albertlll.github.io/mik/",
   plugins: [react()],
   resolve: {
@@ -11,7 +15,6 @@ export default defineConfig({
     },
 
   },
-
   define: {
     // "process.env": process.env,
     // // By default, Vite doesn't include shims for NodeJS/
