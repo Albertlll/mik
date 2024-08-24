@@ -101,7 +101,9 @@ export function MessageInput(props: {setMessagesData : Dispatch<SetStateAction<m
 
     
       props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {type : 'chart', position: 'left', content : {data : 123}}])
-    
+      props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {type : 'chartPie', position: 'left', content : {data : 123}}])
+      props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {type : 'table', position: 'left', content : {data : 123}}])
+
 
     
 

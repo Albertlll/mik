@@ -15,6 +15,7 @@ import { ScrollArea, ScrollBar } from "./ui/scroll-area";
 import TextMessage from "./messages/text-message"
 import TableMessage from "./messages/table-message";
 import ChartMessage from "./messages/chart-message";
+import ButtonMessage from "./messages/button-message";
 
 function Message(props: { messageData: messageDataProps}) {
     return (
@@ -39,6 +40,10 @@ function Message(props: { messageData: messageDataProps}) {
 
             {props.messageData.type == 'chartPie' &&
             <ChartMessage/>
+            }
+
+            {props.messageData.type == 'button' &&
+            <ButtonMessage type="button" content={props.messageData.content} position={props.messageData.position} />
             }
         </div>
     );
