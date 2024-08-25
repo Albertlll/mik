@@ -90,7 +90,7 @@ export function MessageInput(props: {setMessagesData : Dispatch<SetStateAction<m
 
     // var num = Math.floor(Math.random() * data.length)
     
-    // props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'right', content : {message : message}, type : 'text'}])
+    props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'right', content : {message : message}, type : 'text'}])
     // setTimeout(() => {
 
 
