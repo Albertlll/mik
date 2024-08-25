@@ -15,15 +15,15 @@ function App() {
     <>
         {/* <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <ModeToggle/> */}
-        <StompSessionProvider
+        {/* <StompSessionProvider
             url={"ws://localhost:8080/ws"}
-            onConnect={() => console.log('Приветики')}>
+            onConnect={() => console.log('Приветики')}> */}
         <div className='flex w-full h-full justify-center p-8 mob:p-1'>
         <Chat/>
         {/* <AudioRecorder/> */}
         </div>
 
-        </StompSessionProvider>
+        {/* </StompSessionProvider> */}
         {/* </ThemeProvider> */}
     </>
   )

@@ -1,21 +1,21 @@
 import { messageDataProps } from "./props";
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
-import { Button } from '@/components/ui/button'
+// import { Button } from '@/components/ui/button'
 import avatarImg from '../assets/avatarbot.jpg'
-import { motion } from "framer-motion";
-import AudioPlayer from "./audio-player";
+// import { motion } from "framer-motion";
+// import AudioPlayer from "./audio-player";
 
-import { Bar, BarChart, CartesianGrid, Pie, PieChart, XAxis } from "recharts" 
-import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartConfig } from "@/components/ui/chart"
-import { Card, CardContent } from "./ui/card";
-import {Table, TableCaption, TableHeader, TableRow, TableHead, TableBody, TableCell } from "./ui/table";
-import { ScrollArea, ScrollBar } from "./ui/scroll-area";
+// import { Bar, BarChart, CartesianGrid, Pie, PieChart, XAxis } from "recharts" 
+// import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartConfig } from "@/components/ui/chart"
+// import { Card, CardContent } from "./ui/card";
+// import {Table, TableCaption, TableHeader, TableRow, TableHead, TableBody, TableCell } from "./ui/table";
+// import { ScrollArea, ScrollBar } from "./ui/scroll-area";
 
 import LineChart from '@/components/messages/line-chart'
 
 import TextMessage from "./messages/text-message"
-import TableMessage from "./messages/table-message";
-import ChartMessage from "./messages/chart-message";
+// import TableMessage from "./messages/table-message";
+// import ChartMessage from "./messages/chart-message";
 import ButtonMessage from "./messages/button-message";
 import ChartPieMessage from "./messages/chart-pie-message";
 import AudioMessage from "./messages/audio-message";
