@@ -3,6 +3,7 @@ import { Card, CardContent } from "../ui/card";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "../ui/chart";
 import { ScrollArea } from "../ui/scroll-area";
 import {chartLineMessageContent} from "../props"
+import { motion } from "framer-motion";
 // const LineChartData = [
 //     { date: "2024-04-01", value: 222, mobile: 150 },
 //     { date: "2024-04-02", value: 97, mobile: 180 },
@@ -132,7 +133,17 @@ function LineChart(props : chartLineMessageContent["content"]) {
 
 
     return (
-        <Card className="w-full overflow-hidden ">
+      <motion.div initial={{opacity : 0, scale: 0.1}}
+      animate={{opacity : 1, scale: 1}}
+      transition={{type : 'spring', 
+              duration : 0.01,
+              damping : 20,
+              stiffness : 200,
+              mass : 1,
+              ease : "easeInOut"
+
+          }} className="w-full">
+        <Card className="w-full overflow-hidden " >
         <ScrollArea className="w-full h-full overflow-hidden " >
 
         <CardContent className="px-2 sm:p-6 w-full h-full overflow-hidden ">
@@ -183,6 +194,7 @@ function LineChart(props : chartLineMessageContent["content"]) {
         </CardContent>
         </ScrollArea>
       </Card>
+      </motion.div>
     );
 }
 

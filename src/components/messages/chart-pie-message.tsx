@@ -2,6 +2,7 @@ import { Pie, PieChart } from "recharts";
 import { Card, CardContent } from "../ui/card";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "../ui/chart";
 import { chartPieMessageContent } from "../props";
+import { motion } from "framer-motion";
 
 
 
@@ -31,6 +32,16 @@ function ChartPieMessage(props : chartPieMessageContent["content"]) {
 
 
     return (
+        <motion.div initial={{opacity : 0, scale: 0.1}}
+        animate={{opacity : 1, scale: 1}}
+        transition={{type : 'spring', 
+                duration : 0.01,
+                damping : 20,
+                stiffness : 200,
+                mass : 1,
+                ease : "easeInOut"
+  
+            }} className="w-full">
         <Card className="w-full h-full">
         <CardContent className="px-2 sm:p-6">
         <ChartContainer config={chartPieConfig} className="min-h-[100px] w-full">
@@ -43,6 +54,7 @@ function ChartPieMessage(props : chartPieMessageContent["content"]) {
 
         </CardContent>
         </Card>
+        </motion.div>
     );
 }
 
