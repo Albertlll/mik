@@ -1229,17 +1229,20 @@ export function Chat() {
                     console.log(message)
                     const content = JSON.parse(message.body).content
                     switch (content.type){
-                    case 'text' :
+                   case 'text' :
                         setMessagesData((prev : Array<messageDataProps>) => [...prev, {position: 'left', type: 'text', content: {message: JSON.parse(message.body).content.message}}]);
                         break;
                     case 'chartPie':
+                        setMessagesData((prev : Array<messageDataProps>) => [...prev, {position: 'left', type: 'chartPie', content: content.tool_call}]);
                         setMessagesData((prev : Array<messageDataProps>) => [...prev, {position: 'left', type: 'text', content: {message: JSON.parse(message.body).content.message}}]);
                         break;
                     case 'chartLine':
+                        setMessagesData((prev : Array<messageDataProps>) => [...prev, {position: 'left', type: 'chartLine', content: content.tool_call}]);
                         setMessagesData((prev : Array<messageDataProps>) => [...prev, {position: 'left', type: 'text', content: {message: JSON.parse(message.body).content.message}}]);
+                    
                         break;
                     case 'button':
-                        setMessagesData((prev : Array<messageDataProps>) => [...prev, {position: 'left', type: 'button', content: content}]);
+                        setMessagesData((prev : Array<messageDataProps>) => [...prev, {position: 'left', type: 'button', content: content.tool_call}]);
                         setMessagesData((prev : Array<messageDataProps>) => [...prev, {position: 'left', type: 'text', content: {message: JSON.parse(message.body).content.message}}]);
                         break;
                     // case '':
@@ -1285,12 +1288,12 @@ export function Chat() {
             })
         }
 
-        console.log(stompClient)
-        if (stompClient) {
-            stompClient.publish({
-                destination: "/",
-                body: "Echo 123",
-        });}
+        // console.log(stompClient)
+        // if (stompClient) {
+        //     stompClient.publish({
+        //         destination: "/",
+        //         body: "Echo 123",
+        // });}
 
 
 
