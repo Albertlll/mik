@@ -1,4 +1,4 @@
-import { Braces, CornerDownLeft } from "lucide-react"
+import { CornerDownLeft } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
@@ -9,7 +9,7 @@ import { messageDataProps } from "./props"
 // import data from '../assets/data.json'
 // import { describe } from "node:test"
 import AudioPlayer from "./audio-player"
-import { Client } from "react-stomp-hooks"
+// import { Client } from "react-stomp-hooks"
 // import { socket } from "./chat"
 
 
@@ -1220,21 +1220,21 @@ const linearChartData = {
 
 
 
-function getBase64(file : Blob) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      if (!reader.result) {return}
-      let encoded = reader.result.toString().replace(/^data:(.*,)?/, '');
-      if ((encoded.length % 4) > 0) {
-        encoded += '='.repeat(4 - (encoded.length % 4));
-      }
-      resolve(encoded);
-    };
-    reader.onerror = error => reject(error);
-  });
-}
+// function getBase64(file : Blob) {
+//   return new Promise((resolve, reject) => {
+//     const reader = new FileReader();
+//     reader.readAsDataURL(file);
+//     reader.onload = () => {
+//       if (!reader.result) {return}
+//       let encoded = reader.result.toString().replace(/^data:(.*,)?/, '');
+//       if ((encoded.length % 4) > 0) {
+//         encoded += '='.repeat(4 - (encoded.length % 4));
+//       }
+//       resolve(encoded);
+//     };
+//     reader.onerror = error => reject(error);
+//   });
+// }
 
 
 export function MessageInput(props: {setMessagesData : Dispatch<SetStateAction<messageDataProps[]>>}) {

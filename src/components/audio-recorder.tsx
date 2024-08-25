@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 // import { Button } from "./ui/button";
 // import { UrlObject } from "url";
-import { Mic, MicOff } from "lucide-react";
+import { Mic } from "lucide-react";
 
 const AudioRecorder = (props : {setAudioURL : Function, setAudioBlob : Function}) => {
     const mimeType = "audio/ogg";

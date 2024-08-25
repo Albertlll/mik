@@ -2,7 +2,7 @@
 import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartConfig } from "@/components/ui/chart"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { CartesianGrid, Bar, XAxis, BarChart, LabelList } from "recharts";
-import { Card, CardContent } from "../ui/card";
+// import { Card, CardContent } from "../ui/card";
 import { ScrollBar } from "../ui/scroll-area";
 const chartData = 
 [

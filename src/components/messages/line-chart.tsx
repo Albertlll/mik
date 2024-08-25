@@ -1,6 +1,5 @@
-import { TrendingUp } from "lucide-react";
 import { CartesianGrid, XAxis, Area, AreaChart } from "recharts";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "../ui/card";
+import { Card, CardContent } from "../ui/card";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "../ui/chart";
 import { ScrollArea } from "../ui/scroll-area";
 import {chartLineMessageContent} from "../props"

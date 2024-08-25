@@ -1,4 +1,4 @@
-import { ChartConfig } from "./ui/chart"
+// import { ChartConfig } from "./ui/chart"
 
 export interface abstractMessageDataProps {
 
