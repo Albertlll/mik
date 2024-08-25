@@ -1210,9 +1210,9 @@ export function Chat() {
 
     const stompClient = useStompClient();
     
-    useEffect(() => {
-        setMessagesData((prev : Array<messageDataProps>) => [...prev, {position: 'left', type: 'chartPie', content: PieData.tool_call}]);
-    }, []);
+    // useEffect(() => {
+    //     setMessagesData((prev : Array<messageDataProps>) => [...prev, {position: 'left', type: 'chartPie', content: PieData.tool_call}]);
+    // }, []);
 
 
     useEffect(() => {
