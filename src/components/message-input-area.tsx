@@ -52,34 +52,34 @@ export function MessageInput(props: {setMessagesData : Dispatch<SetStateAction<m
 
     }
 
-    if (audioURL && audioBlob){
+    // if (audioURL && audioBlob){
 
-      // socket.emit('/app/chat', 'mvjmfdmvmdf')
+    //   // socket.emit('/app/chat', 'mvjmfdmvmdf')
 
-      props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'right', content : {audioURL : audioURL}, type : 'audio'}]);
-      setAudioURL('')
-      // var reader = new FileReader();
-      // reader.readAsDataURL(audioBlob); 
-      // reader.onloadend = function() {
-      // var base64data = reader.result;
-      // console.log(base64data);
+    //   props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'right', content : {audioURL : audioURL}, type : 'audio'}]);
+    //   setAudioURL('')
+    //   // var reader = new FileReader();
+    //   // reader.readAsDataURL(audioBlob); 
+    //   // reader.onloadend = function() {
+    //   // var base64data = reader.result;
+    //   // console.log(base64data);
 
-      getBase64(audioBlob).then((base64data) => {
+    //   getBase64(audioBlob).then((base64data) => {
 
-        if (!props.stompClient) {return;}
-        console.log(base64data)
-        props.stompClient.publish({
-          destination: "/app/chat/audio",
-          body: JSON.stringify({senderId: localStorage.getItem('uuid'), content: {audioURL : base64data}}),
-        })
+    //     if (!props.stompClient) {return;}
+    //     console.log(base64data)
+    //     props.stompClient.publish({
+    //       destination: "/app/chat/audio",
+    //       body: JSON.stringify({senderId: localStorage.getItem('uuid'), content: {audioURL : base64data}}),
+    //     })
       
-      })
+    //   })
 
       
 
 
-      return
-    }
+    //   return
+    // }
 
       props.stompClient.publish({
         destination: "/app/chat/text",
@@ -189,7 +189,7 @@ export function MessageInput(props: {setMessagesData : Dispatch<SetStateAction<m
           Отправить сообщение
           <CornerDownLeft className="size-3.5" />
         </Button>
-        <AudioRecorder setAudioBlob={setAudioBlob} setAudioURL={setAudioURL}/>
+        {/* <AudioRecorder setAudioBlob={setAudioBlob} setAudioURL={setAudioURL}/> */}
 
       </div>
     </div>

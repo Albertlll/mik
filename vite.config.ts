@@ -3,11 +3,11 @@ import react from "@vitejs/plugin-react"
 import { defineConfig } from "vite"
 
 export default defineConfig({
-  // server: {
-  //   host: '192.168.1.51'
-  // },
+  server: {
+    host: '192.168.96.156'
+  },
 
-  base: "https://albertlll.github.io/mik/",
+  // base: "https://albertlll.github.io/mik/",
   plugins: [react()],
   resolve: {
     alias: {
