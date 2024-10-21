@@ -1,4 +1,4 @@
-import { messageDataProps } from "./props";
+import { messageDataProps } from "@/storage/interfaces";
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { Button } from '@/components/ui/button'
 import avatarImg from '../assets/avatarbot.jpg'
@@ -7,70 +7,15 @@ import AudioPlayer from "./audio-player";
 function Message(props: { messageData: messageDataProps }) {
     console.log(props.messageData.position)
     return (
+        
+
+        
         <div className={props.messageData.position == "left" ?
             "w-full flex justify-end" :
             "w-full flex justify-start gap-3"
         }>
 
-
-            {
-                props.messageData.position != "left" &&
-                <motion.div
-
-                    initial={{ opacity: 0, scale: 0.1 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{
-                        type: 'spring',
-                        duration: 0.01,
-                        damping: 20,
-                        stiffness: 200,
-                        mass: 1,
-                        ease: "easeInOut"
-
-                    }}
-
-
-                >
-                    <Avatar>
-                        <AvatarImage src={avatarImg} />
-                    </Avatar>
-                </motion.div>
-            }
-
-            {props.messageData.type == 'button' ?
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.1 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{
-                        type: 'spring',
-                        duration: 0.01,
-                        damping: 20,
-                        stiffness: 200,
-                        mass: 1,
-                        ease: "easeInOut"
-
-                    }} className={props.messageData.position == "left" ?
-                        "relative max-w-[70%] text-left break-words p-2 bg-primary rounded-lg" :
-                        "relative max-w-[70%] text-left break-words p-2 bg-secondary rounded-lg"}>
-                    <div className="w-full h-full gap-4 flex flex-col justify-between items-center">
-
-                        <div className="text-4xl text-primary">
-                            {props.messageData.content.header + '₽'}
-                        </div>
-                        {/* 
-                    <div className="text-sm text">
-                        {props.messageData.content.description}
-                    </div> */}
-
-                        <Button>
-                            {props.messageData.content.buttonBody}
-                        </Button>
-                    </div>
-
-                </motion.div>
-
-            :
-            props.messageData.type == 'audio' ?
+            { props.messageData.type == 'audio' ?
             <motion.div
                     initial={{opacity : 0, scale: 0.1}}
                     animate={{opacity : 1, scale: 1}}
@@ -85,13 +30,13 @@ function Message(props: { messageData: messageDataProps }) {
                 "relative w-[40%] text-left break-words p-2 bg-primary rounded-lg flex justify-center" :
                 "relative w-[60%] text-left break-words p-2 bg-secondary rounded-lg flex justify-center"}>
 
-                        <AudioPlayer barGap={2} barWidth={2} audioHeight={40} audioURL={props.messageData.audioURL} />
+                        <AudioPlayer barGap={2} barWidth={2} audioHeight={40} audioURL={props.messageData.content.audioURL} />
 
                 </motion.div>
 
-
-                    :
-
+                :
+                    
+                    props.messageData.type == 'text' &&
                     <motion.div
                     initial={{opacity : 0, scale: 0.1}}
                     animate={{opacity : 1, scale: 1}}
@@ -105,10 +50,13 @@ function Message(props: { messageData: messageDataProps }) {
                         }} className={props.messageData.position == "left" ?
                 "relative max-w-[70%] text-left break-words p-2 bg-primary rounded-lg" :
                 "relative max-w-[70%] text-left break-words p-2 bg-secondary rounded-lg"}>
-                    {props.messageData.message.toString()}
+                    {props.messageData.content.message.toString()}
                 </motion.div>
-            }
-        </div >
+
+                        }
+                
+
+          </div>
 
     );
 }

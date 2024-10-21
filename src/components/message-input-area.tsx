@@ -5,15 +5,17 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import AudioRecorder from "./audio-recorder"
 import { useState, useRef} from "react"
-import { messageDataProps } from "./props"
 // import data from '../assets/data.json'
 // import { describe } from "node:test"
 import AudioPlayer from "./audio-player"
+import { useMessagesStore } from "@/storage/MessagesStore"
 
 
 
+export function MessageInput() {
 
-export function MessageInput(props: {setMessagesData : Function}) {
+
+  const { addMessage } = useMessagesStore()
 
   const [message, setMessage] = useState<string>('');
 
@@ -27,7 +29,7 @@ export function MessageInput(props: {setMessagesData : Function}) {
     }
 
     if (audioURL){
-      props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'left', audioURL : audioURL, type : 'audio'}]);
+      addMessage({position : 'left', content : {audioURL : audioURL}, type : 'audio'});
       setAudioURL('')
 
       return
@@ -35,18 +37,18 @@ export function MessageInput(props: {setMessagesData : Function}) {
 
     // var num = Math.floor(Math.random() * data.length)
     
-    props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'left', message : message, type : 'text'}])
-    setTimeout(() => {
+    addMessage({position : 'left', content : {message : message}, type : 'text'})
+    // setTimeout(() => {
 
-    props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'right', content : {header : '500', buttonBody : 'Отправить', description : 'Внуку для школы'}, type : 'button'}])
+    // props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'right', content : {header : '500', buttonBody : 'Отправить', description : 'Внуку для школы'}, type : 'button'}])
     
-    }, 300)
+    // }, 300)
 
-    setTimeout(() => {
+    // setTimeout(() => {
 
-      props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'right', message : 'Нажмите на кнопку Отправить, чтобы прислать деньги внуку. После нажатия вы войдете в систему СБП для перевода, где вы сможете сверить данные и подтвердить перевод.', type : 'text'}])
+    //   props.setMessagesData((prev : Array<messageDataProps>) => [...prev, {position : 'right', message : 'Нажмите на кнопку Отправить, чтобы прислать деньги внуку. После нажатия вы войдете в систему СБП для перевода, где вы сможете сверить данные и подтвердить перевод.', type : 'text'}])
       
-      }, 300)
+    //   }, 300)
 
     if (messageInputRef.current) {
       messageInputRef.current.value = ''
